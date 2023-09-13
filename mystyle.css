@@ -1,0 +1,65 @@
+body {
+  font-family: Helvetica;
+  margin: 0
+}
+
+#board {
+    background-image: url("./images/background.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#controlBtns {
+    display: none
+}
+button {
+  /* margin-top: 50px;
+  margin-bottom: 30px; */
+  background-color: #ff81eb;
+  border: 10px outset #ff81eb;
+  color: black;
+  border-radius: 0;
+  margin-left: 130px;
+  height: 89px;
+  width: 227px;
+  font-family: Helvetica;
+  font-size: 1.6em;
+}
+
+button:hover {
+  /* margin-top: 50px;
+  margin-bottom: 30px; */
+  background-color: #00E417;
+  border: 10px outset #00E417;
+  color: black;
+  border-radius: 0;
+  margin-left: 130px;
+  height: 89px;
+  width: 227px;
+  font-family: Helvetica;
+  font-size: 1.6em;
+}
+
+
+/* Game board CSS rules */
+
+.game-board {
+  background: url("../images/background.png") no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  position: fixed; 
+}
+
+/* Scoreboard CSS rules */
+
+.scoreboard {
+  position: absolute;
+  height: 60px;
+  width: 400px;
+  background-color: rgba(119, 119, 119,0.8);
+  border-radius: 10px;
+  /* margin-top: 45px;
+  margin-left: 34%; */
+  margin-right: auto;
+}
