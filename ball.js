@@ -1,7 +1,7 @@
 // Shoot ball
 /////////////////accelerate x/y
 class Ball {
-    constructor(board, keeper) {
+    constructor(board, keeper, game) {
       this.x = 1150     
       this.y = 1280;     
       this.width = 200;  
@@ -20,32 +20,48 @@ class Ball {
       this.element.style.top = `${this.y}px`;
       this.board = board
       this.keeper = keeper
+      this.game = game
       this.board.appendChild(this.element)
       this.controlBtns.forEach((btn) => {
           btn.addEventListener("click", (e) => {
+              this.controlBtns.forEach((btn) => btn.disabled = 'true')
+              setTimeout(() => {
+              this.controlBtns.forEach((btn) => btn.disabled = false)
+              this.x = 1150     
+              this.y = 1280;     
+                this.updatePosition()
+              }, 4000)
+              this.game.round++;
+              this.game.moveKeeper(this.keeper.keeperMoves[this.game.round])
+
+             
              switch(e.target.id){
-                 case "top-right": this.ballInterval = setInterval(() => this.topRight(), 10);
+                 case "top-right": this.ballInterval = setInterval(() => {
+                     this.topRight()
+                    }, 10)
+                    this.keeper.dive(83)
                  break;
-                 case "top-left": this.ballInterval = setInterval(() => this.topLeft(), 10);
+                 case "top-left": this.ballInterval = setInterval(() => this.topLeft(), 10)
+                  this.keeper.dive(65)
                  break;
                  case "bottom-right": this.ballInterval = setInterval(() => this.bottomRight(), 10);
+                 this.keeper.dive(88);
                  break;
                  case "bottom-left": this.ballInterval = setInterval(() => this.bottomLeft(), 10);
+                 this.keeper.dive(90);
                  break;
                  default: return
 
                  
              }
+
           })
       })
     
     }
 
     updatePosition(){
-        if(this.y === 430) {
-            clearInterval(this.ballInterval)
-            this.ballInterval = null
-        }
+        
         this.element.style.top = `${this.y}px`
         this.element.style.left = `${this.x}px`
     }
@@ -54,7 +70,12 @@ class Ball {
 //top left-65 top right-83 bottom left-90 bottom right-88
 
      topLeft() {
-         this.keeper.dive(65)
+        //  this.keeper.dive(65)
+        if(this.y <= 430) {
+            clearInterval(this.ballInterval)
+            this.ballInterval = null
+        }
+       
         this.x -= 5;
         this.y -= 5;
      
@@ -62,43 +83,53 @@ class Ball {
     }
 
      topRight() {
-        this.keeper.dive(83)
-      if (this.x !== 1000 && this.y !== 250) {
+        // this.keeper.dive(83)
+       
+        if(this.y <= 570) {
+            clearInterval(this.ballInterval)
+            this.ballInterval = null
+        }
+
+     
         this.x += 5;
         this.y -= 5;
-      }
+      
    
-      else {
-        clearInterval(start);
-      }
+     
       this.updatePosition()
 
     }
 
      bottomLeft() {
-        this.keeper.dive(90)
-      if (this.x !== 185 && this.y !== 500) {
+       
+        if(this.y <= 570) {
+            clearInterval(this.ballInterval)
+            this.ballInterval = null
+        }
+        // this.keeper.dive(90)
+     
         this.x -= 5;
         this.y -= 3;
-      }
+      
   
-      else {
-        clearInterval(start);
-      }
+     
       this.updatePosition()
 
     }
   
      bottomRight() {
-        this.keeper.dive(88)
-      if (this.x !== 1010 && this.y !== 500) {
+       
+        if(this.y <= 570) {
+            clearInterval(this.ballInterval)
+            this.ballInterval = null
+        }
+        // this.keeper.dive(88)
+     
         this.x += 5;
         this.y -= 3;
-      }
+   
 
-      else {
-        clearInterval(start);
-      }
+     
       this.updatePosition()
 
     }
